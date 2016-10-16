@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -30,12 +29,12 @@ public class RegisterActivity extends AppCompatActivity {
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onRegisterButtonClicked();
+                correctRegister();
             }
         });
     }
 
-    private void onRegisterButtonClicked() {
+    private void correctRegister() {
         if (username.length() > 0) {
             if (pswd.length() > 7) {
                 if (pswd.getText().toString().equals(confirmPswd.getText().toString())) {
