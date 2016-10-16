@@ -49,10 +49,10 @@ public class LoginActivity extends AppCompatActivity {
             if (password.length() > 0) {
                 Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(this, "Invalid password or username", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Password is empty", Toast.LENGTH_SHORT).show();
             }
         } else {
-            Toast.makeText(this, "Invalid password or usernam", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Username is empty", Toast.LENGTH_SHORT).show();
         }
     }
 }
