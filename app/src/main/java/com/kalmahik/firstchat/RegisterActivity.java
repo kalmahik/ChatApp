@@ -39,7 +39,7 @@ public class RegisterActivity extends AppCompatActivity {
         if (username.length() > 0) {
             if (pswd.length() > 7) {
                 if (pswd.getText().toString().equals(confirmPswd.getText().toString())) {
-                    Toast.makeText(this, "Login succes", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Login success", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(this, "Passwords different", Toast.LENGTH_SHORT).show();
                 }
