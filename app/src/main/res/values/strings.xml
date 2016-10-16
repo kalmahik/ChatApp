@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name">Chat</string>
-    <string name="login">Login</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="forgot_pswd">Forgot Password</string>
-    <string name="registr">Registr</string>
     <string name="confirm_pswd">Confirm Password</string>
+    <string name="login">Login</string>
+    <string name="register">Register</string>
     <string name="sign_up">Sign UP</string>
+    <string name="sign_in">Sign IN</string>
+
 </resources>

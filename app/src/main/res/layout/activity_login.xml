@@ -30,7 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="end"
         android:background="@color/colorAccent"
-        android:text="@string/login"
+        android:text="@string/sign_in"
         android:textColor="@android:color/white"
         android:textSize="24sp"
         />
@@ -58,7 +58,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="end"
-            android:text="@string/registr"
+            android:text="@string/register"
             android:textColor="@android:color/black"
             android:textSize="18sp"
             />
