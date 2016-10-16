@@ -3,16 +3,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingLeft="16dp"
-    android:paddingRight="16dp"
-    android:paddingTop="16dp">
+    android:paddingLeft="@dimen/padding"
+    android:paddingRight="@dimen/padding"
+    android:paddingTop="@dimen/padding">
 
     <EditText
         android:id="@+id/username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/username"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size"
         />
 
     <EditText
@@ -21,7 +21,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:hint="@string/password"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size"
         />
 
     <Button
@@ -32,7 +32,7 @@
         android:background="@color/colorAccent"
         android:text="@string/sign_in"
         android:textColor="@android:color/white"
-        android:textSize="24sp"
+        android:textSize="@dimen/text_size"
         />
     <TextView
         android:layout_width="match_parent"
@@ -60,7 +60,7 @@
             android:layout_gravity="end"
             android:text="@string/register"
             android:textColor="@android:color/black"
-            android:textSize="18sp"
+            android:textSize="@dimen/tex_size_small"
             />
 
     </FrameLayout>
