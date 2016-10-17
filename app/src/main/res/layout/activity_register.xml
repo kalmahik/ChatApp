@@ -5,7 +5,8 @@
     android:orientation="vertical"
     android:paddingLeft="16dp"
     android:paddingRight="16dp"
-    android:paddingTop="16dp">
+    android:paddingTop="16dp"
+    android:background="@color/colorPrimary">
 
     <EditText
         android:id="@+id/username"
@@ -35,9 +36,8 @@
 
     <Button
         android:id="@+id/button_register"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_gravity="end"
         android:background="@color/colorAccent"
         android:text="@string/sign_up"
         android:textColor="@android:color/white"
