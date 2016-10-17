@@ -1,79 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background_1"
     android:orientation="vertical"
+    android:paddingBottom="@dimen/padding"
     android:paddingLeft="@dimen/padding"
     android:paddingRight="@dimen/padding"
-    android:paddingTop="@dimen/padding"
-    android:paddingBottom="@dimen/padding"
-    android:background="@color/colorPrimary">
+    android:paddingTop="@dimen/padding">
 
-    <EditText
-        android:id="@+id/username"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/username"
-        android:textSize="@dimen/text_size"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
 
-        />
+        <EditText
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/username"
+            android:textColor="@color/icons"
+            android:textColorHint="@color/divider"
+            android:textSize="@dimen/text_size" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        <EditText
+            android:id="@+id/password"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin"
+            android:hint="@string/password"
+            android:inputType="textPassword"
+            android:textColor="@color/icons"
+            android:textColorHint="@color/divider"
+            android:textSize="@dimen/text_size" />
 
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:inputType="textPassword"
-        android:hint="@string/password"
-        android:textSize="@dimen/text_size"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="@dimen/margin"
+            android:background="@color/colorAccent"
+            android:text="@string/sign_in"
+            android:textColor="@color/icons"
+            android:textSize="@dimen/text_size" />
 
-    <Button
-        android:id="@+id/button_login"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:background="@color/colorAccent"
-        android:text="@string/sign_in"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/text_size"
-        />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        />
+        <TextView
+            android:id="@+id/ref_recovery"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/margin"
+            android:text="@string/forgot_password_ref"
+            android:textColor="@color/icons"
+            android:textSize="18sp" />
+    </LinearLayout>
 
-    <TextView
-        android:id="@+id/ref_recovery"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/forgot_password_ref"
-        android:textColor="@android:color/white"
-        android:textSize="18sp"
-        android:layout_gravity="center"
-
-        />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="210dp"
-        />
     <TextView
         android:id="@+id/ref_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="bottom|center"
         android:text="@string/register_ref"
-        android:textColor="@android:color/white"
-        android:textSize="@dimen/tex_size_small"
-        android:layout_gravity="center"
-        />
-
-</LinearLayout>
+        android:textColor="@color/icons"
+        android:textSize="@dimen/tex_size_small" />
+</FrameLayout>
