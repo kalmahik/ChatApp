@@ -1,6 +1,7 @@
 package com.kalmahik.firstchat;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +16,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button signInButton;
     private EditText username;
     private EditText password;
+    private TextView logo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,6 +36,7 @@ public class LoginActivity extends AppCompatActivity {
         signInButton = (Button) findViewById(R.id.button_login);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
+        logo = (TextView) findViewById(R.id.logo);
 
         signInButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -42,6 +45,9 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/twiddlestix.ttf");
+        logo.setText("@firstchat");
+        logo.setTypeface(typeFace);
     }
 
     private void correctSignIn() {
