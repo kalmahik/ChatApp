@@ -2,7 +2,7 @@
     <string name="app_name">Chat</string>
     <string name="username">Username</string>
     <string name="password">Password</string>
-    <string name="forgot_password_ref"><u>Forgot Password</u></string>
+    <string name="forgot_password_ref"><u>Forgot Password?</u></string>
     <string name="confirm_password">Confirm Password</string>
     <string name="login">Login</string>
     <string name="register">Register</string>
