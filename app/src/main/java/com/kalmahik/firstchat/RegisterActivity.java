@@ -3,7 +3,10 @@ package com.kalmahik.firstchat;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -23,6 +26,8 @@ public class RegisterActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
+        ActionBar actionBar = getSupportActionBar();
+
         password = (EditText) findViewById(R.id.password);
         confirmPswd = (EditText) findViewById(R.id.confirm_password);
         username = (EditText) findViewById(R.id.username);
@@ -38,7 +43,6 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/twiddlestix.ttf");
-        logo.setText("@firstchat");
         logo.setTypeface(typeFace);
     }
 

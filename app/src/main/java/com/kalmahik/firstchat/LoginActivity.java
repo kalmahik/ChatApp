@@ -2,6 +2,7 @@ package com.kalmahik.firstchat;
 
 import android.content.Intent;
 import android.graphics.Typeface;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 public class LoginActivity extends AppCompatActivity {
 
     private TextView registerRef;
+    private TextView recoveryRef;
     private Button signInButton;
     private EditText username;
     private EditText password;
@@ -23,12 +25,25 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
+        ActionBar actionBar = getSupportActionBar();
+
         registerRef = (TextView) findViewById(R.id.ref_register);
 
         registerRef.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(LoginActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
+        });
+
+
+        recoveryRef = (TextView) findViewById(R.id.ref_recovery);
+
+        recoveryRef.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
                 startActivity(intent);
             }
         });
@@ -46,8 +61,15 @@ public class LoginActivity extends AppCompatActivity {
         });
 
         Typeface typeFace = Typeface.createFromAsset(getAssets(), "fonts/twiddlestix.ttf");
-        logo.setText("@firstchat");
         logo.setTypeface(typeFace);
+
+        logo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     private void correctSignIn() {
@@ -61,4 +83,7 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Username is empty", Toast.LENGTH_SHORT).show();
         }
     }
+
+
+
 }

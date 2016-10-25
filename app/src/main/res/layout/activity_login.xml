@@ -2,13 +2,10 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorAccent"
+    android:background="@drawable/background_gradient"
     android:descendantFocusability="beforeDescendants"
     android:focusableInTouchMode="true"
-    android:paddingBottom="@dimen/padding"
-    android:paddingLeft="@dimen/padding"
-    android:paddingRight="@dimen/padding"
-    android:paddingTop="@dimen/padding">
+    android:padding="@dimen/padding">
 
     <TextView
         android:id="@+id/logo"
@@ -16,7 +13,7 @@
         android:layout_height="match_parent"
         android:gravity="center|top"
         android:text="@string/logo"
-        android:textColor="@color/icons"
+        android:textColor="@color/color_text"
         android:textSize="44sp" />
 
     <LinearLayout
@@ -28,21 +25,21 @@
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/divider">
+            android:textColorHint="@color/color_hint">
 
             <EditText
                 android:id="@+id/username"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/username"
-                android:textColor="@color/icons"
+                android:textColor="@color/color_text"
                 android:textSize="@dimen/text_size" />
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColorHint="@color/divider">
+            android:textColorHint="@color/color_hint">
 
             <EditText
                 android:id="@+id/password"
@@ -51,7 +48,7 @@
                 android:layout_marginTop="@dimen/margin"
                 android:hint="@string/password"
                 android:inputType="textPassword"
-                android:textColor="@color/icons"
+                android:textColor="@color/color_text"
                 android:textSize="@dimen/text_size" />
         </android.support.design.widget.TextInputLayout>
 
@@ -61,9 +58,9 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:layout_marginTop="@dimen/margin"
-            android:background="@color/colorPrimaryDark"
+            android:background="@color/color_primary_dark"
             android:text="@string/sign_in"
-            android:textColor="@color/icons"
+            android:textColor="@color/color_text"
             android:textSize="@dimen/text_size" />
 
         <TextView
@@ -73,7 +70,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="@dimen/margin"
             android:text="@string/forgot_password_ref"
-            android:textColor="@color/icons"
+            android:textColor="@color/color_text"
             android:textSize="18sp" />
     </LinearLayout>
 
@@ -83,6 +80,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center"
         android:text="@string/register_ref"
-        android:textColor="@color/icons"
+        android:textColor="@color/color_text"
         android:textSize="@dimen/tex_size_small" />
 </FrameLayout>
