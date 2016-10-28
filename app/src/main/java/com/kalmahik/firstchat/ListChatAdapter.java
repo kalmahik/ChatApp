@@ -13,11 +13,9 @@ public class ListChatAdapter extends RecyclerView.Adapter<ListChatAdapter.ViewHo
     private ArrayList<Chat> chats;
     private OnListItemClickListener clickListener;
 
-
     public ListChatAdapter(ArrayList<Chat> chats, OnListItemClickListener clickListener) {
         this.chats = chats;
         this.clickListener = clickListener;
-
     }
 
     @Override
@@ -37,27 +35,27 @@ public class ListChatAdapter extends RecyclerView.Adapter<ListChatAdapter.ViewHo
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView avatar;
+        TextView image;
         TextView title;
         TextView lastMessage;
-        TextView time_stamp;
+        TextView updated;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            avatar = (TextView) itemView.findViewById(R.id.avatar);
+            image = (TextView) itemView.findViewById(R.id.image);
             title = (TextView) itemView.findViewById(R.id.title);
             lastMessage = (TextView) itemView.findViewById(R.id.last_message);
-            time_stamp = (TextView) itemView.findViewById(R.id.time_stamp);
+            updated = (TextView) itemView.findViewById(R.id.updated);
         }
 
         public void bind(Chat chat) {
-            Character nameLogo = chat.getTitle().charAt(0);
-            avatar.setText(nameLogo.toString());
+            Character character = chat.getTitle().charAt(0);
+            image.setText(character.toString());
             title.setText(chat.getTitle());
             lastMessage.setText(chat.getLastMessage());
             Long l = chat.getUpdated();
             String str = Long.toString(l);
-            time_stamp.setText(str);
+            updated.setText(str);
             itemView.setOnClickListener(this);
         }
 
@@ -65,6 +63,5 @@ public class ListChatAdapter extends RecyclerView.Adapter<ListChatAdapter.ViewHo
         public void onClick(View v) {
             clickListener.onClick(v, getAdapterPosition());
         }
-
     }
 }

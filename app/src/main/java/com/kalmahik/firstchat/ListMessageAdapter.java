@@ -43,16 +43,10 @@ public class ListMessageAdapter extends RecyclerView.Adapter<ListMessageAdapter.
 
     @Override
     public int getItemViewType(int position) {
-        if (messages != null) {
-            Message message = messages.get(position);
-            Character choice = message.getSender().charAt(0);
-            String str = choice + "";
-            int i = Integer.valueOf(str);
-            return i;
-        }
-        return 0;
+        Message message = messages.get(position);
+        Character character = message.getSender().charAt(0);
+        return Integer.valueOf(character + "");
     }
-
 
     @Override
     public int getItemCount() {
@@ -60,26 +54,18 @@ public class ListMessageAdapter extends RecyclerView.Adapter<ListMessageAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView avatar;
-        TextView sender;
         TextView created;
         TextView body;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            //sender = (TextView) itemView.findViewById(R.id.sender);
             body = (TextView) itemView.findViewById(R.id.body);
             created = (TextView) itemView.findViewById(R.id.created);
         }
 
         public void bind(Message message) {
-            //Character nameLogo = message.getTitle().charAt(0);
-            //avatar.setText(nameLogo.toString());
-            //sender.setText(message.getSender());
             body.setText(message.getBody());
-            Long l = message.getCreated();
-            String str = Long.toString(l);
-            created.setText(str);
+            created.setText(Long.toString(message.getCreated()));
             itemView.setOnClickListener(this);
         }
 
@@ -87,7 +73,5 @@ public class ListMessageAdapter extends RecyclerView.Adapter<ListMessageAdapter.
         public void onClick(View v) {
             clickListener.onClick(v, getAdapterPosition());
         }
-
     }
-
 }

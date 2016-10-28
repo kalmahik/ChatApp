@@ -8,18 +8,18 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class ListContactAdapter extends RecyclerView.Adapter<ListContactAdapter.ViewHolder> {
+public class ListUserAdapter extends RecyclerView.Adapter<ListUserAdapter.ViewHolder> {
     private ArrayList<User> users;
     private OnListItemClickListener clickListener;
 
-    public ListContactAdapter(ArrayList<User> users, OnListItemClickListener clickListener) {
+    public ListUserAdapter(ArrayList<User> users, OnListItemClickListener clickListener) {
         this.users = users;
         this.clickListener = clickListener;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_contact, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_list_user, parent, false);
         return new ViewHolder(v);
     }
 
@@ -34,24 +34,23 @@ public class ListContactAdapter extends RecyclerView.Adapter<ListContactAdapter.
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
-        TextView avatar;
         TextView name;
-        TextView status;
+        TextView description;
+        TextView image;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            avatar = (TextView) itemView.findViewById(R.id.avatar);
+            image = (TextView) itemView.findViewById(R.id.image);
             name = (TextView) itemView.findViewById(R.id.name);
-            status = (TextView) itemView.findViewById(R.id.status);
+            description = (TextView) itemView.findViewById(R.id.description);
         }
 
         public void bind(User user) {
-            Character nameLogo = user.getName().charAt(0);
-            avatar.setText(nameLogo.toString());
+            Character character = user.getName().charAt(0);
+            image.setText(character.toString());
             name.setText(user.getName());
-            status.setText(user.getStatus());
+            description.setText(user.getDescription());
             itemView.setOnClickListener(this);
-
         }
 
         @Override

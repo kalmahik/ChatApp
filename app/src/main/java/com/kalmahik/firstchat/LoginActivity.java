@@ -2,7 +2,6 @@ package com.kalmahik.firstchat;
 
 import android.content.Intent;
 import android.graphics.Typeface;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -15,7 +14,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextView registerRef;
     private TextView recoveryRef;
-    private Button signInButton;
+    private Button loginButton;
     private EditText username;
     private EditText password;
     private TextView logo;
@@ -24,8 +23,6 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
-        ActionBar actionBar = getSupportActionBar();
 
         registerRef = (TextView) findViewById(R.id.ref_register);
 
@@ -48,12 +45,12 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        signInButton = (Button) findViewById(R.id.button_login);
+        loginButton = (Button) findViewById(R.id.button_login);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         logo = (TextView) findViewById(R.id.logo);
 
-        signInButton.setOnClickListener(new View.OnClickListener() {
+        loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 correctSignIn();
@@ -66,7 +63,7 @@ public class LoginActivity extends AppCompatActivity {
         logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, ProfileActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ListChatActivity.class);
                 startActivity(intent);
             }
         });
@@ -83,7 +80,4 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(this, "Username is empty", Toast.LENGTH_SHORT).show();
         }
     }
-
-
-
 }
