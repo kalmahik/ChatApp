@@ -8,56 +8,88 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.Toast;
 
 
+import com.kalmahik.firstchat.storage.UserDatabase;
 import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmChangeListener;
+
 
 public class ListUserActivity extends AppCompatActivity {
-	private RecyclerView recyclerView;
-	private ListUserAdapter adapter;
-	private ArrayList<User> users;
+    private RecyclerView recyclerView;
+    private ListUserAdapter adapter;
+    private List<User> users;
+    private UserDatabase userDB;
 
-	private OnListItemClickListener clickListener = new OnListItemClickListener() {
-		@Override
-		public void onClick(View v, int position) {
-			//Toast.makeText(ListUserActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
-			Intent intent = new Intent(ListUserActivity.this, ListMessageActivity.class);
-			startActivity(intent);
-		}
-	};
 
-	@Override
-	protected void onCreate(@Nullable Bundle savedInstanceState) {
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_list_user);
+    private OnListItemClickListener clickListener = new OnListItemClickListener() {
+        @Override
+        public void onClick(View v, int position) {
+            Intent intent = new Intent(ListUserActivity.this, ListMessageActivity.class);
+            intent.putExtra("title", users.get(position).getName());
+            startActivity(intent);
+        }
+    };
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-		toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
-		setSupportActionBar(toolbar);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-		getSupportActionBar().setHomeButtonEnabled(true);
-		toolbar.setNavigationOnClickListener(v -> onBackPressed());
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_user);
 
-		recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-		recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeButtonEnabled(true);
+        toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-		FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-		fab.attachToRecyclerView(recyclerView);
+        userDB = new UserDatabase();
 
-		users = new ArrayList<>();
-		for (int i = 0; i < 40; i++) {
-			users.add(new User(i + "Username", i + "Description", i + "Image"));
-		}
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-		adapter = new ListUserAdapter(users, clickListener);
-		recyclerView.setAdapter(adapter);
-	}
+        users = new ArrayList<>();
+        createFakeUsers();
+        performUsers();
 
-	public void onListChanged(int position) {
-		adapter.notifyDataSetChanged();
-	}
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.attachToRecyclerView(recyclerView);
+
+
+        adapter = new ListUserAdapter(users, clickListener);
+        recyclerView.setAdapter(adapter);
+
+
+    }
+
+
+    public void createFakeUsers() {
+
+        ArrayList<User> newUsers = new ArrayList<>();
+
+        for (int i = 0; i < 40; i++) {
+            newUsers.add(new User(i + "Username", i + "Description", i + "Image"));
+        }
+
+        userDB.copyOrUpdate(newUsers);
+
+    }
+
+    private void performUsers() {
+        users = userDB.getAll();
+        userDB.addChangeListener(new RealmChangeListener<Realm>() {
+            @Override
+            public void onChange(Realm element) {
+                if (adapter != null) {
+                    adapter.notifyDataSetChanged();
+                }
+            }
+        });
+    }
+
 }

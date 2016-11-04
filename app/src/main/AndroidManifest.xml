@@ -3,6 +3,7 @@
     package="com.kalmahik.firstchat">
 
     <application
+        android:name=".App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:supportsRtl="true"
@@ -20,7 +21,6 @@
         <activity android:name=".ListUserActivity"></activity>
 
         <activity android:name=".ListChatActivity"></activity>
-
         <activity android:name=".ListMessageActivity"></activity>
 
         <activity android:name=".ProfileActivity"></activity>

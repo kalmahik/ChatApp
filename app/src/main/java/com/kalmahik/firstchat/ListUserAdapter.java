@@ -6,13 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class ListUserAdapter extends RecyclerView.Adapter<ListUserAdapter.ViewHolder> {
-    private ArrayList<User> users;
+    private List<User> users;
     private OnListItemClickListener clickListener;
 
-    public ListUserAdapter(ArrayList<User> users, OnListItemClickListener clickListener) {
+    public ListUserAdapter(List<User> users, OnListItemClickListener clickListener) {
         this.users = users;
         this.clickListener = clickListener;
     }

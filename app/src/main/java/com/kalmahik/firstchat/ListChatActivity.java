@@ -9,6 +9,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,13 +20,12 @@ public class ListChatActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListChatAdapter adapter;
     private ArrayList<Chat> chats;
+    private FloatingActionButton fab;
 
     private OnListItemClickListener clickListener = new OnListItemClickListener() {
         @Override
         public void onClick(View v, int position) {
-           // Toast.makeText(ListChatActivity.this, "Clicked " + position, Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(ListChatActivity.this, ListMessageActivity.class);
-            //String title = chats.get(position).getTitle();
             intent.putExtra("title", chats.get(position).getTitle());
             startActivity(intent);
         }
@@ -46,6 +46,7 @@ public class ListChatActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        fab = (FloatingActionButton)findViewById(R.id.fab);
 
         chats = new ArrayList<>();
 
@@ -63,6 +64,14 @@ public class ListChatActivity extends AppCompatActivity {
 
         adapter = new ListChatAdapter(chats, clickListener);
         recyclerView.setAdapter(adapter);
+
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ListChatActivity.this, ListUserActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 

@@ -3,11 +3,14 @@ package com.kalmahik.firstchat;
 public class Chat {
     private String id;
     private String title;
-    private String author;
     private String[] participants;
     private String lastMessage;
     private long created;
     private long updated;
+
+    public Chat(){
+
+    }
 
     public Chat(String title, String lastMessage, long updated) {
         this.title = title;

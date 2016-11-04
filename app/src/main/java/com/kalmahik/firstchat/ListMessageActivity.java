@@ -1,10 +1,8 @@
 package com.kalmahik.firstchat;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.ExpandedMenuView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -13,14 +11,20 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.kalmahik.firstchat.storage.MessageDatabase;
+
 import java.util.ArrayList;
+import java.util.List;
 
 public class ListMessageActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListMessageAdapter adapter;
-    private ArrayList<Message> messages;
+    private List<Message> messages;
     private Button sendButton;
     private EditText textInput;
+    private MessageDatabase messageDB;
+    private Message newMessage;
+
 
     private OnListItemClickListener clickListener = new OnListItemClickListener() {
         @Override
@@ -43,6 +47,9 @@ public class ListMessageActivity extends AppCompatActivity {
 
         toolbar.setTitle(getIntent().getExtras().getString("title"));
 
+        messageDB = new MessageDatabase();
+        messages = messageDB.getAll();
+
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -57,25 +64,27 @@ public class ListMessageActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 textInput = (EditText) findViewById(R.id.input_text);
-                messages.add(new Message(0 + "Sender", 1976, textInput.getText().toString()));
+                newMessage = new Message(0 + "Sender", 1976, textInput.getText().toString());
+                messages.add(newMessage);
+                messageDB.copyOrUpdate(newMessage);
                 onListChanged(messages.size() - 1);
                 textInput.setText("");
-
+                messageDB.copyOrUpdate(messages);
             }
         });
+
 
         adapter = new ListMessageAdapter(messages, clickListener);
         recyclerView.setAdapter(adapter);
 
-        recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
     }
 
     public void onListChanged(int position) {
-        recyclerView.smoothScrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
         adapter.notifyDataSetChanged();
     }
-
 
 
 }

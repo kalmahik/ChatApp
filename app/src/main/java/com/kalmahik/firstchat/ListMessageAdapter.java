@@ -7,16 +7,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ListMessageAdapter extends RecyclerView.Adapter<ListMessageAdapter.ViewHolder> {
-    private ArrayList<Message> messages;
+    private List<Message> messages;
     private OnListItemClickListener clickListener;
     private final int sender = 0;
     private final int receiver = 1;
 
 
-    public ListMessageAdapter(ArrayList<Message> messages, OnListItemClickListener clickListener) {
+    public ListMessageAdapter(List<Message> messages, OnListItemClickListener clickListener) {
         this.messages = messages;
         this.clickListener = clickListener;
 
