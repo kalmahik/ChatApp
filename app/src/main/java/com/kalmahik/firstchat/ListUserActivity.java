@@ -20,10 +20,12 @@ import io.realm.Realm;
 import io.realm.RealmChangeListener;
 
 
+
 public class ListUserActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private ListUserAdapter adapter;
     private List<User> users;
+    private ArrayList<User> newUsers;
     private UserDatabase userDB;
 
 
@@ -53,7 +55,6 @@ public class ListUserActivity extends AppCompatActivity {
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        users = new ArrayList<>();
         createFakeUsers();
         performUsers();
 
@@ -70,18 +71,17 @@ public class ListUserActivity extends AppCompatActivity {
 
     public void createFakeUsers() {
 
-        ArrayList<User> newUsers = new ArrayList<>();
+        users = new ArrayList<>();
 
         for (int i = 0; i < 40; i++) {
-            newUsers.add(new User(i + "Username", i + "Description", i + "Image"));
+            users.add(new User(i + "Username", i + "Description", i + "Image"));
         }
-
-        userDB.copyOrUpdate(newUsers);
+        userDB.copyOrUpdate(users);
 
     }
 
     private void performUsers() {
-        users = userDB.getAll();
+        //users = userDB.getAll();
         userDB.addChangeListener(new RealmChangeListener<Realm>() {
             @Override
             public void onChange(Realm element) {

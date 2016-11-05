@@ -8,9 +8,10 @@ import java.util.List;
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmConfiguration;
+import io.realm.RealmObject;
 import io.realm.Sort;
 
-public class MessageDatabase {
+public class MessageDatabase{
     private Realm realm;
 
     public MessageDatabase() {

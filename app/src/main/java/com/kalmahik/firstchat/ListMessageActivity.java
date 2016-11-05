@@ -59,6 +59,7 @@ public class ListMessageActivity extends AppCompatActivity {
             messages.add(new Message(i % 2 + "Sender", i + 1976, i + "My message"));
         }
 
+
         sendButton = (Button) findViewById(R.id.button_send);
         sendButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,7 +70,6 @@ public class ListMessageActivity extends AppCompatActivity {
                 messageDB.copyOrUpdate(newMessage);
                 onListChanged(messages.size() - 1);
                 textInput.setText("");
-                messageDB.copyOrUpdate(messages);
             }
         });
 
