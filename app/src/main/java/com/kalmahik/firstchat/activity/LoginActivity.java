@@ -1,4 +1,4 @@
-package com.kalmahik.firstchat;
+package com.kalmahik.firstchat.activity;
 
 import android.content.Intent;
 import android.graphics.Typeface;
@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.kalmahik.firstchat.R;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -63,7 +65,7 @@ public class LoginActivity extends AppCompatActivity {
         logo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, ListChatActivity.class);
+                Intent intent = new Intent(LoginActivity.this, ChatListActivity.class);
                 startActivity(intent);
             }
         });

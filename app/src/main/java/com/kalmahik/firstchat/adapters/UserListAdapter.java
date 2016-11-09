@@ -1,4 +1,4 @@
-package com.kalmahik.firstchat;
+package com.kalmahik.firstchat.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,13 +6,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.kalmahik.firstchat.OnListItemClickListener;
+import com.kalmahik.firstchat.R;
+import com.kalmahik.firstchat.entities.User;
+
 import java.util.List;
 
-public class ListUserAdapter extends RecyclerView.Adapter<ListUserAdapter.ViewHolder> {
+public class UserListAdapter extends RecyclerView.Adapter<UserListAdapter.ViewHolder> {
     private List<User> users;
     private OnListItemClickListener clickListener;
 
-    public ListUserAdapter(List<User> users, OnListItemClickListener clickListener) {
+    public UserListAdapter(List<User> users, OnListItemClickListener clickListener) {
         this.users = users;
         this.clickListener = clickListener;
     }

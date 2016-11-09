@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.kalmahik.firstchat">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:name=".App"
         android:allowBackup="true"
@@ -9,21 +11,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".activity.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".activity.RegisterActivity"></activity>
 
-        <activity android:name=".ListUserActivity"></activity>
+        <activity android:name=".activity.UserListActivity"></activity>
 
-        <activity android:name=".ListChatActivity"></activity>
-        <activity android:name=".ListMessageActivity"></activity>
+        <activity android:name=".activity.ChatListActivity"></activity>
+        <activity android:name=".activity.MessageListActivity"></activity>
 
-        <activity android:name=".ProfileActivity"></activity>
+        <activity android:name=".activity.ProfileActivity"></activity>
 
 
     </application>

@@ -1,4 +1,4 @@
-package com.kalmahik.firstchat;
+package com.kalmahik.firstchat.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -6,18 +6,21 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import java.util.ArrayList;
+import com.kalmahik.firstchat.entities.Message;
+import com.kalmahik.firstchat.OnListItemClickListener;
+import com.kalmahik.firstchat.R;
+
 import java.util.List;
 
 
-public class ListMessageAdapter extends RecyclerView.Adapter<ListMessageAdapter.ViewHolder> {
+public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.ViewHolder> {
     private List<Message> messages;
     private OnListItemClickListener clickListener;
     private final int sender = 0;
     private final int receiver = 1;
 
 
-    public ListMessageAdapter(List<Message> messages, OnListItemClickListener clickListener) {
+    public MessageListAdapter(List<Message> messages, OnListItemClickListener clickListener) {
         this.messages = messages;
         this.clickListener = clickListener;
 

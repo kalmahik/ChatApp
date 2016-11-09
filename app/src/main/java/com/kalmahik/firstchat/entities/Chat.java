@@ -1,6 +1,8 @@
-package com.kalmahik.firstchat;
+package com.kalmahik.firstchat.entities;
 
-public class Chat {
+import io.realm.RealmObject;
+
+public class Chat extends RealmObject{
     private String id;
     private String title;
     private String[] participants;

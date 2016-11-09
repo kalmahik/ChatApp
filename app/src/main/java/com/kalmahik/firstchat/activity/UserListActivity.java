@@ -1,4 +1,4 @@
-package com.kalmahik.firstchat;
+package com.kalmahik.firstchat.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,10 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 
 
+import com.kalmahik.firstchat.OnListItemClickListener;
+import com.kalmahik.firstchat.R;
+import com.kalmahik.firstchat.adapters.UserListAdapter;
+import com.kalmahik.firstchat.entities.User;
 import com.kalmahik.firstchat.storage.UserDatabase;
 import com.melnykov.fab.FloatingActionButton;
 
@@ -21,9 +25,9 @@ import io.realm.RealmChangeListener;
 
 
 
-public class ListUserActivity extends AppCompatActivity {
+public class UserListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private ListUserAdapter adapter;
+    private UserListAdapter adapter;
     private List<User> users;
     private ArrayList<User> newUsers;
     private UserDatabase userDB;
@@ -32,7 +36,7 @@ public class ListUserActivity extends AppCompatActivity {
     private OnListItemClickListener clickListener = new OnListItemClickListener() {
         @Override
         public void onClick(View v, int position) {
-            Intent intent = new Intent(ListUserActivity.this, ListMessageActivity.class);
+            Intent intent = new Intent(UserListActivity.this, MessageListActivity.class);
             intent.putExtra("title", users.get(position).getName());
             startActivity(intent);
         }
@@ -62,7 +66,7 @@ public class ListUserActivity extends AppCompatActivity {
         fab.attachToRecyclerView(recyclerView);
 
 
-        adapter = new ListUserAdapter(users, clickListener);
+        adapter = new UserListAdapter(users, clickListener);
         recyclerView.setAdapter(adapter);
 
 

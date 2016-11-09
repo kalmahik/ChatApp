@@ -1,4 +1,4 @@
-package com.kalmahik.firstchat;
+package com.kalmahik.firstchat.entities;
 
 
 import io.realm.RealmObject;

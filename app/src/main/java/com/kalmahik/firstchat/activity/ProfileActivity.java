@@ -1,10 +1,11 @@
-package com.kalmahik.firstchat;
+package com.kalmahik.firstchat.activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 
+import com.kalmahik.firstchat.R;
 import com.kalmahik.firstchat.storage.UserPreferences;
 
 public class ProfileActivity extends AppCompatActivity {

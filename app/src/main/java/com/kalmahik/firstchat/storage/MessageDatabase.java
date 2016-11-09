@@ -1,14 +1,13 @@
 package com.kalmahik.firstchat.storage;
 
 
-import com.kalmahik.firstchat.Message;
+import com.kalmahik.firstchat.entities.Message;
 
 import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmChangeListener;
 import io.realm.RealmConfiguration;
-import io.realm.RealmObject;
 import io.realm.Sort;
 
 public class MessageDatabase{
@@ -36,6 +35,7 @@ public class MessageDatabase{
     public List<Message> getAll() {
 		return realm.where(Message.class).findAllSorted("created", Sort.DESCENDING);
     }
+
 
     public void close() {
         if (!realm.isClosed()) {

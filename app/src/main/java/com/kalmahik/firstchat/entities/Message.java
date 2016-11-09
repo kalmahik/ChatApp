@@ -1,4 +1,4 @@
-package com.kalmahik.firstchat;
+package com.kalmahik.firstchat.entities;
 
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -15,7 +15,8 @@ public class Message extends RealmObject {
 
     }
 
-    public Message(String sender, long created, String body) {
+    public Message(String id, String sender, long created, String body) {
+        this.id = id;
         this.sender = sender;
         this.created = created;
         this.body = body;

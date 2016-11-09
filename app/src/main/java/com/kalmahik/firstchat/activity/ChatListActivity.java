@@ -1,4 +1,4 @@
-package com.kalmahik.firstchat;
+package com.kalmahik.firstchat.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -9,23 +9,26 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+
+import com.kalmahik.firstchat.entities.Chat;
+import com.kalmahik.firstchat.OnListItemClickListener;
+import com.kalmahik.firstchat.R;
+import com.kalmahik.firstchat.adapters.ChatListAdapter;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 
-public class ListChatActivity extends AppCompatActivity {
+public class ChatListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
-    private ListChatAdapter adapter;
+    private ChatListAdapter adapter;
     private ArrayList<Chat> chats;
     private FloatingActionButton fab;
 
     private OnListItemClickListener clickListener = new OnListItemClickListener() {
         @Override
         public void onClick(View v, int position) {
-            Intent intent = new Intent(ListChatActivity.this, ListMessageActivity.class);
+            Intent intent = new Intent(ChatListActivity.this, MessageListActivity.class);
             intent.putExtra("title", chats.get(position).getTitle());
             startActivity(intent);
         }
@@ -62,13 +65,13 @@ public class ListChatActivity extends AppCompatActivity {
             }
         });
 
-        adapter = new ListChatAdapter(chats, clickListener);
+        adapter = new ChatListAdapter(chats, clickListener);
         recyclerView.setAdapter(adapter);
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(ListChatActivity.this, ListUserActivity.class);
+                Intent intent = new Intent(ChatListActivity.this, UserListActivity.class);
                 startActivity(intent);
             }
         });

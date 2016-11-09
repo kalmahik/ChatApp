@@ -1,7 +1,7 @@
 package com.kalmahik.firstchat.storage;
 
 
-import com.kalmahik.firstchat.User;
+import com.kalmahik.firstchat.entities.User;
 
 import java.util.List;
 
