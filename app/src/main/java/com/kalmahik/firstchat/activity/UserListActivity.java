@@ -9,7 +9,6 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-
 import com.kalmahik.firstchat.OnListItemClickListener;
 import com.kalmahik.firstchat.R;
 import com.kalmahik.firstchat.adapters.UserListAdapter;
@@ -19,19 +18,13 @@ import com.melnykov.fab.FloatingActionButton;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import io.realm.Realm;
-import io.realm.RealmChangeListener;
-
-
+import java.util.UUID;
 
 public class UserListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private UserListAdapter adapter;
     private List<User> users;
-    private ArrayList<User> newUsers;
     private UserDatabase userDB;
-
 
     private OnListItemClickListener clickListener = new OnListItemClickListener() {
         @Override
@@ -46,6 +39,8 @@ public class UserListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_user);
+        userDB = new UserDatabase();
+        //users = userDB.getAll();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
@@ -54,46 +49,32 @@ public class UserListActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        userDB = new UserDatabase();
-
-        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
-
         createFakeUsers();
         performUsers();
 
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.attachToRecyclerView(recyclerView);
-
-
         adapter = new UserListAdapter(users, clickListener);
         recyclerView.setAdapter(adapter);
-
-
     }
 
-
     public void createFakeUsers() {
-
         users = new ArrayList<>();
-
-        for (int i = 0; i < 40; i++) {
-            users.add(new User(i + "Username", i + "Description", i + "Image"));
-        }
+        users.add(new User(UUID.randomUUID().toString(), "sveta95",  "Всем привет!)", "Image"));
+        users.add(new User(UUID.randomUUID().toString(), "belova39",  "Все что не делается - все к лучшему", "Image"));
+        users.add(new User(UUID.randomUUID().toString(), "ivan.ivan",  "Тут", "Image"));
+        users.add(new User(UUID.randomUUID().toString(), "egor.petrov", "Доступен", "Image"));
         userDB.copyOrUpdate(users);
-
     }
 
     private void performUsers() {
-        //users = userDB.getAll();
-        userDB.addChangeListener(new RealmChangeListener<Realm>() {
-            @Override
-            public void onChange(Realm element) {
-                if (adapter != null) {
-                    adapter.notifyDataSetChanged();
-                }
+        users = userDB.getAll();
+        userDB.addChangeListener(element -> {
+            if (adapter != null) {
+                adapter.notifyDataSetChanged();
             }
         });
     }
-
 }

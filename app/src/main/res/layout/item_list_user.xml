@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="72dp"
-    android:orientation="horizontal">
+    android:layout_height="72dp">
 
     <TextView
         android:id="@+id/image"
@@ -32,10 +31,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
-        android:layout_marginTop="0dp"
         android:layout_toRightOf="@+id/image"
         android:textColor="@android:color/darker_gray"
-        android:textSize="17sp"
+        android:textSize="15sp"
         tools:text="Description" />
 
     <View

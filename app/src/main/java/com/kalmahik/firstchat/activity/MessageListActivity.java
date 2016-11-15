@@ -29,7 +29,6 @@ public class MessageListActivity extends AppCompatActivity {
     private MessageDatabase messageDB;
     private Message newMessage;
 
-
     private OnListItemClickListener clickListener = new OnListItemClickListener() {
         @Override
         public void onClick(View v, int position) {
@@ -55,6 +54,9 @@ public class MessageListActivity extends AppCompatActivity {
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        adapter = new MessageListAdapter(messages, clickListener);
+        recyclerView.setAdapter(adapter);
+        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
 
         textInput = (EditText) findViewById(R.id.input_text);
 
@@ -64,21 +66,15 @@ public class MessageListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 newMessage = new Message(UUID.randomUUID().toString(), 0 + "Sender", 1976, textInput.getText().toString());
                 messageDB.copyOrUpdate(newMessage);
-                onListChanged(messages.size() - 1);
+                onListChanged();
                 textInput.setText("");
             }
         });
 
-        adapter = new MessageListAdapter(messages, clickListener);
-        recyclerView.setAdapter(adapter);
-
-        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
-
     }
-
-    public void onListChanged(int position) {
-        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount() - 1);
+    public void onListChanged() {
         adapter.notifyDataSetChanged();
+        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount());
     }
 
 

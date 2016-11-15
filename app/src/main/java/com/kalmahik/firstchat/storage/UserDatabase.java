@@ -33,7 +33,7 @@ public class UserDatabase {
 	}
 
 	public List<User> getAll() {
-		return realm.where(User.class).findAllSorted("name", Sort.DESCENDING);
+		return realm.where(User.class).findAllSorted("name", Sort.ASCENDING);
 	}
 
 	public void close() {

@@ -12,8 +12,10 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 import com.kalmahik.firstchat.R;
+import com.kalmahik.firstchat.entities.AuthResponse;
 import com.kalmahik.firstchat.entities.RequestContainer;
 import com.kalmahik.firstchat.entities.AuthPayload;
+import com.kalmahik.firstchat.entities.ResponseContainer;
 import com.kalmahik.firstchat.util.HashUtil;
 
 import java.io.IOException;
@@ -68,7 +70,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void doSignUp() {
-        AuthPayload payload = new AuthPayload(username.toString(), HashUtil.hash(password.toString()));
+        AuthPayload payload = new AuthPayload(username.getText().toString(), HashUtil.hash(password.getText().toString()));
         final RequestContainer<AuthPayload> requestContainer = new RequestContainer<>(payload);
         new Thread(new Runnable() {
             @Override
@@ -82,7 +84,11 @@ public class RegisterActivity extends AppCompatActivity {
                         .build();
                 try {
                     Response response = client.newCall(request).execute();
-                    Log.d(RegisterActivity.class.getSimpleName(), response.body().string());
+                    Gson gson = new Gson();
+                    ResponseContainer rc = gson.fromJson(response.body().string(), ResponseContainer.class);
+                    AuthResponse ar = gson.fromJson(rc.getPayload().toString(), AuthResponse.class);
+                    Log.d(RegisterActivity.class.getSimpleName(), ar.getUser().getName());
+
                 } catch (IOException e) {
                     Log.e(RegisterActivity.class.getSimpleName(), Log.getStackTraceString(e));
                 }

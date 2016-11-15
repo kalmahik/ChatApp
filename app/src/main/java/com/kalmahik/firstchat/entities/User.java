@@ -5,7 +5,6 @@ import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
 public class User extends RealmObject{
-
 	@PrimaryKey
 	private String id;
 	private String name;
@@ -16,7 +15,8 @@ public class User extends RealmObject{
 
 	}
 
-	public User(String name, String description, String image) {
+	public User(String id, String name, String description, String image) {
+		this.id = id;
 		this.name = name;
 		this.description = description;
 		this.image = image;

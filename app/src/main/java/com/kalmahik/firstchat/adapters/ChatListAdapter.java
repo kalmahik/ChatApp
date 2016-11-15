@@ -11,13 +11,13 @@ import com.kalmahik.firstchat.OnListItemClickListener;
 import com.kalmahik.firstchat.R;
 
 import java.util.ArrayList;
-
+import java.util.List;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
-    private ArrayList<Chat> chats;
+    private List<Chat> chats;
     private OnListItemClickListener clickListener;
 
-    public ChatListAdapter(ArrayList<Chat> chats, OnListItemClickListener clickListener) {
+    public ChatListAdapter(List<Chat> chats, OnListItemClickListener clickListener) {
         this.chats = chats;
         this.clickListener = clickListener;
     }
