@@ -8,33 +8,41 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
+import com.kalmahik.firstchat.api.ChatApi;
+import com.kalmahik.firstchat.api.MessageReceiver;
+import com.kalmahik.firstchat.api.WSClient;
 import com.kalmahik.firstchat.entities.Chat;
 import com.kalmahik.firstchat.OnListItemClickListener;
 import com.kalmahik.firstchat.R;
 import com.kalmahik.firstchat.adapters.ChatListAdapter;
+import com.kalmahik.firstchat.entities.Message;
+import com.kalmahik.firstchat.services.MessageService;
 import com.kalmahik.firstchat.storage.ChatDatabase;
+import com.kalmahik.firstchat.storage.UserPreferences;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
-import java.util.UUID;
 
-public class ChatListActivity extends AppCompatActivity {
+public class ChatListActivity extends AppCompatActivity
+        implements MessageReceiver {
     private RecyclerView recyclerView;
     private ChatListAdapter adapter;
     private List<Chat> chats;
     private FloatingActionButton fab;
     private ChatDatabase chatDB;
-    private Chat chat;
+
 
     private OnListItemClickListener clickListener = new OnListItemClickListener() {
         @Override
         public void onClick(View v, int position) {
             Intent intent = new Intent(ChatListActivity.this, MessageListActivity.class);
             intent.putExtra("title", chats.get(position).getTitle());
+            intent.putExtra("id", chats.get(position).getParticipants());
+            intent.putExtra("chatId", chats.get(position).getId());
             startActivity(intent);
         }
     };
@@ -43,8 +51,15 @@ public class ChatListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_chats);
+
+        startService(new Intent(this, MessageService.class));
+
+        //при логауте
+//		stopService(new Intent(this, MessageService.class));
+
         chatDB = new ChatDatabase();
-        chats = chatDB.getAll();
+        getChats();
+        performChats();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
@@ -53,50 +68,33 @@ public class ChatListActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        createFakeUsers();
-        performUsers();
-
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         fab = (FloatingActionButton) findViewById(R.id.fab);
 
-//        chats = new ArrayList<>();
-
-//        for (int i = 0; i < 40; i++) {
-//            chats.add(new Chat(UUID.randomUUID().toString(), i + "Title", i + "Last message", i + 24101976));
-//        }
-
-//        Collections.sort(chats, new Comparator<Chat>() {
-//            public int compare(Chat chat1, Chat chat2) {
-//                String s1 = Long.toString(chat1.getUpdated());
-//                String s2 = Long.toString(chat2.getUpdated());
-//                return s2.compareTo(s1);
-//            }
-//        });
-
         adapter = new ChatListAdapter(chats, clickListener);
         recyclerView.setAdapter(adapter);
 
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ChatListActivity.this, UserListActivity.class);
-                startActivity(intent);
-            }
+        fab.setOnClickListener(v -> {
+            Intent intent = new Intent(ChatListActivity.this, UserListActivity.class);
+            startActivity(intent);
         });
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        WSClient.getInstance().registerObserver(this);
+    }
+
+    @Override
+    protected void onStop() {
+        WSClient.getInstance().unregisterObserver(this);
+        super.onStop();
 
     }
 
-    public void createFakeUsers() {
-        chats = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
-            chat = new Chat(UUID.randomUUID().toString(), i + "Username", i + "Description", 2016-i);
-            chats.add(chat);
-            chatDB.copyOrUpdate(chat);
-        }
-    }
-
-    private void performUsers() {
+    private void performChats() {
         chats = chatDB.getAll();
         chatDB.addChangeListener(element -> {
             if (adapter != null) {
@@ -105,7 +103,41 @@ public class ChatListActivity extends AppCompatActivity {
         });
     }
 
-    public void onListChanged(int position) {
-        adapter.notifyDataSetChanged();
+    private void getChats() {
+        UserPreferences preferences = new UserPreferences(this);
+        ChatApi.getInstance().getChats(preferences.getToken(),
+                result -> {
+                    if (result.size() > 0)
+                        chatDB.copyOrUpdate(result);
+                },
+                result -> Toast.makeText(this, "Error get chats", Toast.LENGTH_SHORT).show());
     }
+
+    public void onListChanged() {
+        adapter.notifyDataSetChanged();
+        recyclerView.scrollToPosition(recyclerView.getAdapter().getItemCount());
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_example, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.item1:
+                Intent intent = new Intent(ChatListActivity.this, ProfileActivity.class);
+                startActivity(intent);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onMessageReceived(Message message) {
+
+    }
+    
 }

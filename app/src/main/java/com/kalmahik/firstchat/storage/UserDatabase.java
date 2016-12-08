@@ -32,9 +32,16 @@ public class UserDatabase {
 		realm.commitTransaction();
 	}
 
+	public void erase() {
+		realm.beginTransaction();
+		realm.deleteAll();
+		realm.commitTransaction();
+	}
+
 	public List<User> getAll() {
 		return realm.where(User.class).findAllSorted("name", Sort.ASCENDING);
 	}
+
 
 	public void close() {
 		if (!realm.isClosed()) {

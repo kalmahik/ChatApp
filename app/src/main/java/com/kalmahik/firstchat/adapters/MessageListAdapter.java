@@ -9,6 +9,8 @@ import android.widget.TextView;
 import com.kalmahik.firstchat.entities.Message;
 import com.kalmahik.firstchat.OnListItemClickListener;
 import com.kalmahik.firstchat.R;
+import com.kalmahik.firstchat.storage.UserPreferences;
+import com.kalmahik.firstchat.util.DateUtil;
 
 import java.util.List;
 
@@ -18,11 +20,14 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     private OnListItemClickListener clickListener;
     private final int sender = 0;
     private final int receiver = 1;
+    private String selfId;
+    private UserPreferences preferences;
 
 
-    public MessageListAdapter(List<Message> messages, OnListItemClickListener clickListener) {
+    public MessageListAdapter(List<Message> messages, OnListItemClickListener clickListener, UserPreferences preferences) {
         this.messages = messages;
         this.clickListener = clickListener;
+        this.preferences = preferences;
 
     }
 
@@ -48,8 +53,8 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
     @Override
     public int getItemViewType(int position) {
         Message message = messages.get(position);
-        Character character = message.getSender().charAt(0);
-        return Integer.valueOf(character + "");
+        if (message.getSender().equals(preferences.getSelfId())) return 0;
+        return 1;
     }
 
     @Override
@@ -69,7 +74,7 @@ public class MessageListAdapter extends RecyclerView.Adapter<MessageListAdapter.
 
         public void bind(Message message) {
             body.setText(message.getBody());
-            created.setText(Long.toString(message.getCreated()));
+            created.setText(DateUtil.tsToTime(message.getCreated()));
             itemView.setOnClickListener(this);
         }
 

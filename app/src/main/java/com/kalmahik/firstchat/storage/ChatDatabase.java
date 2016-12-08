@@ -27,9 +27,9 @@ public class ChatDatabase {
         realm.commitTransaction();
     }
 
-    public void copyOrUpdate(List<User> users) {
+    public void copyOrUpdate(List<Chat> chats) {
         realm.beginTransaction();
-        realm.copyToRealmOrUpdate(users);
+        realm.copyToRealmOrUpdate(chats);
         realm.commitTransaction();
     }
 
@@ -41,6 +41,12 @@ public class ChatDatabase {
         if (!realm.isClosed()) {
             realm.close();
         }
+    }
+
+    public void erase() {
+        realm.beginTransaction();
+        realm.deleteAll();
+        realm.commitTransaction();
     }
 
     public void addChangeListener(RealmChangeListener<Realm> changeListener) {

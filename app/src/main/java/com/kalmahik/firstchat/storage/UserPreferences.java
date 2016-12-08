@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 public class UserPreferences {
 	public static final String KEY_TOKEN = "key_token";
 	public static final String KEY_SELF_ID = "key_self_id";
+	public static final String KEY_USERNAME = "key_username";
 	private SharedPreferences preferences;
 
 	public UserPreferences(Context context) {
@@ -31,5 +32,15 @@ public class UserPreferences {
 
 	public String getSelfId() {
 		return preferences.getString(KEY_SELF_ID, null);
+	}
+
+	public void setUsername(String username) {
+		preferences.edit()
+				.putString(KEY_USERNAME, username)
+				.apply();
+	}
+
+	public String getUsername() {
+		return preferences.getString(KEY_USERNAME, null);
 	}
 }

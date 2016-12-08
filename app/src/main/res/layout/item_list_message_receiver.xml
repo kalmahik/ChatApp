@@ -4,7 +4,9 @@
     android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
     android:orientation="horizontal"
-    >
+    android:paddingRight="72dp">
+
+
 
     <TextView
         android:id="@+id/body"
@@ -12,24 +14,27 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:gravity="center"
-        android:paddingTop="@dimen/padding_small"
-        android:paddingLeft="@dimen/padding_small"
-        android:paddingBottom="@dimen/padding"
-        android:paddingRight="@dimen/padding"
-        android:layout_margin="@dimen/padding_small"
         android:background="@drawable/bubble_receiver"
         android:textColor="@android:color/black"
         android:textSize="17sp"
-        tools:text="sender_message" />
+        tools:text="sender_message"
+        android:paddingTop="4dp"
+        android:paddingLeft="@dimen/padding_small"
+        android:paddingBottom="@dimen/padding"
+        android:paddingRight="2dp"
+        android:layout_margin="@dimen/padding_small"
+
+        />
 
     <TextView
         android:id="@+id/created"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignBottom="@+id/body"
-        android:layout_marginLeft="24dp"
         android:textSize="13sp"
-        tools:text="22/10/16"
-        android:textColor="@android:color/darker_gray"/>
+        tools:text="22:22"
+        android:textColor="@android:color/darker_gray"
+        android:paddingRight="2dp"
+        android:layout_alignBottom="@+id/body"
+        android:layout_alignRight="@+id/body"
+        android:layout_alignEnd="@+id/body" />
 </RelativeLayout>

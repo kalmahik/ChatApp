@@ -9,13 +9,15 @@ import android.widget.TextView;
 import com.kalmahik.firstchat.entities.Chat;
 import com.kalmahik.firstchat.OnListItemClickListener;
 import com.kalmahik.firstchat.R;
+import com.kalmahik.firstchat.util.DateUtil;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHolder> {
     private List<Chat> chats;
     private OnListItemClickListener clickListener;
+
 
     public ChatListAdapter(List<Chat> chats, OnListItemClickListener clickListener) {
         this.chats = chats;
@@ -57,9 +59,7 @@ public class ChatListAdapter extends RecyclerView.Adapter<ChatListAdapter.ViewHo
             image.setText(character.toString());
             title.setText(chat.getTitle());
             lastMessage.setText(chat.getLastMessage());
-            Long l = chat.getUpdated();
-            String str = Long.toString(l);
-            updated.setText(str);
+            updated.setText(DateUtil.tsToDate(chat.getUpdated()));
             itemView.setOnClickListener(this);
         }
 

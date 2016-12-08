@@ -7,18 +7,20 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.kalmahik.firstchat.OnListItemClickListener;
 import com.kalmahik.firstchat.R;
 import com.kalmahik.firstchat.adapters.UserListAdapter;
+import com.kalmahik.firstchat.api.ChatApi;
 import com.kalmahik.firstchat.entities.User;
 import com.kalmahik.firstchat.storage.UserDatabase;
+import com.kalmahik.firstchat.storage.UserPreferences;
 import com.melnykov.fab.FloatingActionButton;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.UUID;
 
 public class UserListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
@@ -26,11 +28,13 @@ public class UserListActivity extends AppCompatActivity {
     private List<User> users;
     private UserDatabase userDB;
 
+
     private OnListItemClickListener clickListener = new OnListItemClickListener() {
         @Override
         public void onClick(View v, int position) {
             Intent intent = new Intent(UserListActivity.this, MessageListActivity.class);
             intent.putExtra("title", users.get(position).getName());
+            intent.putExtra("id", users.get(position).getId());
             startActivity(intent);
         }
     };
@@ -39,8 +43,6 @@ public class UserListActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_user);
-        userDB = new UserDatabase();
-        //users = userDB.getAll();
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         toolbar.setNavigationIcon(R.drawable.ic_arrow_back);
@@ -49,7 +51,8 @@ public class UserListActivity extends AppCompatActivity {
         getSupportActionBar().setHomeButtonEnabled(true);
         toolbar.setNavigationOnClickListener(v -> onBackPressed());
 
-        createFakeUsers();
+        userDB = new UserDatabase();
+        getUsers();
         performUsers();
 
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
@@ -60,14 +63,6 @@ public class UserListActivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
     }
 
-    public void createFakeUsers() {
-        users = new ArrayList<>();
-        users.add(new User(UUID.randomUUID().toString(), "sveta95",  "Всем привет!)", "Image"));
-        users.add(new User(UUID.randomUUID().toString(), "belova39",  "Все что не делается - все к лучшему", "Image"));
-        users.add(new User(UUID.randomUUID().toString(), "ivan.ivan",  "Тут", "Image"));
-        users.add(new User(UUID.randomUUID().toString(), "egor.petrov", "Доступен", "Image"));
-        userDB.copyOrUpdate(users);
-    }
 
     private void performUsers() {
         users = userDB.getAll();
@@ -77,4 +72,17 @@ public class UserListActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void getUsers() {
+        UserPreferences preferences = new UserPreferences(this);
+        ChatApi.getInstance().getUsers(preferences.getToken(),
+                result -> {
+                    userDB.copyOrUpdate(result);
+                    System.out.println(result.get(2).getImage());
+                    Toast.makeText(UserListActivity.this, "Success get UserList", Toast.LENGTH_SHORT).show();
+                },
+                result -> Log.e(UserListActivity.class.getSimpleName(), "Error getting UserList"));
+
+    }
+
 }

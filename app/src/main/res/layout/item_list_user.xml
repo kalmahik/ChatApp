@@ -11,6 +11,7 @@
         android:layout_margin="@dimen/padding_small"
         android:background="@drawable/ic_user_background"
         android:gravity="center"
+        android:textAllCaps="true"
         android:textColor="@color/color_text"
         android:textSize="34sp"
         tools:text="U" />
@@ -19,10 +20,11 @@
         android:id="@+id/name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/padding_small"
+        android:layout_marginTop="@dimen/padding"
         android:layout_toRightOf="@+id/image"
+        android:maxLines="1"
         android:textColor="@android:color/black"
-        android:textSize="21sp"
+        android:textSize="18sp"
         android:textStyle="bold"
         tools:text="Username" />
 
@@ -32,6 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/name"
         android:layout_toRightOf="@+id/image"
+        android:singleLine="true"
         android:textColor="@android:color/darker_gray"
         android:textSize="15sp"
         tools:text="Description" />
@@ -39,8 +42,8 @@
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        android:background="@android:color/darker_gray"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="72dp"/>
+        android:layout_marginLeft="72dp"
+        android:background="@android:color/darker_gray" />
 
 </RelativeLayout>

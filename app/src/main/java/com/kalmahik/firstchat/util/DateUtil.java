@@ -15,4 +15,9 @@ public class DateUtil {
         SimpleDateFormat format = new SimpleDateFormat("HH:mm", Locale.getDefault());
         return format.format(new Date(ts));
     }
+
+    public static String tsToDate(long ts) {
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yy", Locale.getDefault());
+        return format.format(new Date(ts));
+    }
 }

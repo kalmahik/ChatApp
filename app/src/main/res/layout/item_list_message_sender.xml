@@ -3,32 +3,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:paddingLeft="72dp">
 
     <TextView
         android:id="@+id/body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_margin="@dimen/padding_small"
         android:background="@drawable/bubble_sender"
-        android:gravity="center"
-        android:paddingBottom="@dimen/padding"
-        android:paddingLeft="@dimen/padding"
-        android:paddingRight="@dimen/padding_small"
-        android:paddingTop="@dimen/padding_small"
+        tools:text="sender_message"
         android:textColor="@android:color/black"
         android:textSize="17sp"
-        tools:text="sender_message" />
+        android:paddingTop="4dp"
+        android:paddingLeft="2dp"
+        android:paddingBottom="@dimen/padding"
+        android:paddingRight="@dimen/padding_small"
+        android:layout_margin="@dimen/padding_small"
+
+        />
 
     <TextView
         android:id="@+id/created"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/body"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="24dp"
         android:textColor="@android:color/darker_gray"
         android:textSize="13sp"
-        tools:text="22/10/16" />
+        tools:text="22/10/16"
+        android:layout_alignBottom="@+id/body"
+        android:layout_alignLeft="@+id/body"
+        android:layout_alignStart="@+id/body"
+        android:paddingLeft="2dp"/>
 </RelativeLayout>

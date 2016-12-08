@@ -33,9 +33,20 @@ public class MessageDatabase{
     }
 
     public List<Message> getAll() {
-		return realm.where(Message.class).findAllSorted("created", Sort.DESCENDING);
+		return realm.where(Message.class).findAllSorted("created", Sort.ASCENDING);
     }
 
+    public List<Message> getAllByChatId(String chatId){
+        return realm.where(Message.class)
+                .equalTo("chatId", chatId)
+                .findAll();
+    }
+
+    public void erase() {
+        realm.beginTransaction();
+        realm.deleteAll();
+        realm.commitTransaction();
+    }
 
     public void close() {
         if (!realm.isClosed()) {

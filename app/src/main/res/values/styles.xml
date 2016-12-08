@@ -6,7 +6,6 @@
         <item name="colorPrimary">@color/color_background</item>
         <item name="colorPrimaryDark">@color/color_primary_dark</item>
         <item name="colorAccent">@color/color_text</item>
-
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
